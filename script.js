@@ -1,6 +1,6 @@
 $( document ).ready( function () {
     var theurl;
-    for ( var i = 1; i < 3; i++) {
+    for ( var i = 1; i < 5; i++) {
         theurl = 'http://pokeapi.co/api/v2/pokemon/' + i + '/';
         console.log ( theurl );
 
@@ -13,22 +13,32 @@ $( document ).ready( function () {
             console.log ( pokemon.abilities[0].ability.name );
             console.log ( pokemon.sprites.front_default );
 
-            $( '#pokemons' ).append( $( '<div class="pokemons"><h2>' + pokemon.name + '</h2> <img src=" ' + pokemon.sprites.front_default + ' "> </div>' ));
-
-            pokeWidth = $( "pokemon.sprites.front_default" ).attr( "width" );
-            console.log ( pokeWidth );
-            console.log ( $( "https://www.w3schools.com/css/img_mountains.jpg" )).attr( 'width' );
+            $( '#pokemons' ).append( $( "<div class='pokemons'><h2>" + pokemon.name + "</h2><img id=" + pokemon.id + " src='" + pokemon.sprites.front_default + "'></div>" ));
 
         }, 'json');
     }
-    $( document ).on( 'click', 'img', function () {
-        console.log ( 'click!' );
-        pokeWidth = $( this ).attr( 'width' );
-        console.log ( pokeWidth );
-        
-    } )
-    // $( 'img' ).click( function () {
-    //     console.log ( 'click2!' );
 
-    // } )
+    // FETCHING AND DISPLAYING DETAILS UPON A CLICK
+    $( document ).on( 'click', '#pokemons img', function () {
+        console.log ( 'click!' );
+        // console.log ( $( this ).attr( 'src' ) ) ; //ALTERNATIVE EXTRACTION OF URL
+        console.log ( $( this ).attr( 'id' ) );
+        pickedUrl = 'http://pokeapi.co/api/v2/pokemon/' + $( this ).attr( 'id' ) + '/';
+        console.log ( pickedUrl );
+        $.get( pickedUrl, function ( pickedPokemon ) {
+            $( 'h3').css( 'display', 'block' );
+            $( '#pokeName' ).text( "" + pickedPokemon.name + "" );
+            $( '#pokeImg' ).attr( 'src', pickedPokemon.sprites.front_default );
+            
+            // RESETTING AND POPULATING THE LIST OF TYPES
+            $( '#pokeTypes' ).html('');
+            for ( var i = 0; i < pickedPokemon.types.length; i++ ) {
+                $( '#pokeTypes' ).append( "<li>" + pickedPokemon.types[i].type.name + "</li>" );
+            }
+
+            $( '#pokeHeight' ).text( "" + pickedPokemon.height + "");
+            $( '#pokeWeight' ).text( "" + pickedPokemon.weight + "");
+
+        }, 'json' );
+    } )
 })

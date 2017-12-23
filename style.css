@@ -1,9 +1,30 @@
 *{
     font-family: helvetica;
+    margin: 0px;
+    padding: 0px;
 }
 
 h1 {
     color: fuchsia;
+}
+
+h2 {
+    text-align: center;
+    color: rgb(252, 162, 162);
+}
+
+h3 {
+    display: none;
+    margin: 15px 0px 5px 0px;
+    font-size: 14px;
+}
+
+p, li {
+    font-size: 12px;
+}
+
+ul {
+    list-style-position: inside;
 }
 
 .pokemons {
@@ -13,8 +34,6 @@ h1 {
     border: 1px solid fuchsia;
     padding: 10px;
     border-radius: 10px;
-    color: rgb(252, 162, 162);
-    text-align: center
 }
 
 #pokemons, #pokeDex {
@@ -23,17 +42,16 @@ h1 {
 }
 
 #pokemons {
-    max-width: 800px;
+    width: 600px;
 }
 
 #pokeDex {
     width: 150px;
-    height: 300px;
-    min-height: 1px;
+    min-height: 300px;
     border-top: 20px solid fuchsia;
     border-right: 20px solid fuchsia;
     border-bottom: 40px solid fuchsia;
     border-left: 20px solid fuchsia;
     border-radius: 10px;
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
 }
